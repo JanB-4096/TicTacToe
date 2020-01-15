@@ -1,15 +1,11 @@
-'''
-Created on 08.01.2020
-
-@author: jberger
-'''
 from gameManager import GameOn
 
 if __name__ == '__main__':
     retry = True
     while retry:
         go = GameOn()
-        go.setPlayers('random', 'heuristic')
+        go.setPlayers('nn', 'heuristic')
+        go.loadNN('nnModel//tttModel.h5', 'p1') # decide which NN should play
         go.__run__()
         
         again = True

@@ -2,7 +2,8 @@ from gameEnums import FieldState
 import numpy as np
 import itertools
 import copy
-
+from trainer import NNModel
+from telnetlib import DO
 
 
 class Player():
@@ -66,10 +67,7 @@ class NPCHeuristic(Player):
             
             # reward setting a field where the opponent has 2 next to it
             valueBacklash = 0
-            if self.gmCopy.currentPlayer is FieldState.X:
-                self.gmCopy.field[row, col] = FieldState.O
-            elif self.gmCopy.currentPlayer is FieldState.O:
-                self.gmCopy.field[row, col] = FieldState.X
+            self.gmCopy.field[row, col] = self.gmCopy.oppononentPlayer
             if self.gmCopy.checkVictory():
                 valueBacklash = 0.6
             self.gmCopy.field[row, col] = FieldState.EMPTY # set field back to empty
@@ -118,24 +116,36 @@ class NPCRandom(Player):
         return [row, col]
     
     
-    
-class NPCSearch(Player):
-    # TODO: explore whole workspace and take the best chances
+        
+class NPCNeuralNet(Player):
     def __init__(self, gm):
         self.gm = gm
+        self.model = NNModel(self.gm)
         
     def calculateMove(self):
-        isValidMove = False
-        while not isValidMove:
-            
-            row = np.random.randint(0, 3)
-            col = np.random.randint(0, 3)
-            
-            
-            isValidMove = self.checkValidity(row, col)
-            
-        return [row, col]
+        # this player only uses the NN-Model
+        probabilty = self.model.predict()
+        sortedProb = np.unique(probabilty)
+        isValid = False
+        counter = -1
         
+        while isValid is False:
+            move = np.where(probabilty == sortedProb[counter])
+            for index in range(move[0].size):
+                row = move[0][index]
+                col = move[1][index]
+                if self.checkValidity(row, col):
+                    return [row, col]
+            counter -= 1
+           
+    def createNewNN(self, layers):
+        self.model.createNewNN(layers)
+    
+    def train(self, field, move, reward):
+        self.model.train(field, move, reward, 1)
+        
+    def saveNN(self, fileName):
+        self.model.saveNN(fileName)
 
-
-
+    def loadNN(self, fileName):
+        self.model.loadNN(fileName)
