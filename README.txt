@@ -22,6 +22,7 @@ __evaluate__ is used to measure the win rate of the net
     the same 2 games depending on which player starts, but not win 
     (it is possible to win vs the heuristic player) --> evaluate loss history
 - Training can be done in batches --> also helpfull for loss history
+- Do not reward a draw - you want the NN to win?!
 
 
 %% CONCLUSIONS %%
@@ -30,5 +31,6 @@ __evaluate__ is used to measure the win rate of the net
     parameter tuning is important and annoying --> use AutoML or something similar or 
     programm a little automation
 - Training vs a variaty of players might help the NN getting better
-- 10000 games for training might not be enough for a RandomPlayer as opponent but moght be too many for a HeuristicPlayer as opponent
+- 10000 games for training might not be enough for a RandomPlayer as opponent but might 
+    be too many for a HeuristicPlayer as opponent
 - I need more practice in buildiung NN  --> there is so much more to discover in TensorFlow :-D

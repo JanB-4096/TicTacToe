@@ -188,8 +188,8 @@ class GameOn():
             rewardP1 = 0
             rewardP2 = 1
         elif self.gm.status is GameStatus.DRAW:
-            rewardP1 = 0.25
-            rewardP2 = 0.25
+            rewardP1 = 0.01
+            rewardP2 = 0.01
         if isinstance(self.p1, NPCNeuralNet):
             for idx in range(movesP1.__len__()):
                 self.p1.train(fieldP1[idx], movesP1[idx], rewardP1)

@@ -58,6 +58,6 @@ class NNModel():
             moveField[move[0],move[1]] = reward
         else:
             moveField = np.full((3,3), 0)
-            moveField[self.gm.field == FieldState.EMPTY] = 0.125 # every empty field is better then the chosen one because it lead to a loss
+            moveField[self.gm.field == FieldState.EMPTY] = 0.05 # every empty field is better then the chosen one because it lead to a loss
             moveField[move[0],move[1]] = 0
         return (moveField.reshape(1,9))
