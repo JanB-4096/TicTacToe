@@ -4,8 +4,8 @@ if __name__ == '__main__':
     retry = True
     while retry:
         go = GameOn()
-        go.setPlayers('nn', 'heuristic')
-        go.loadNN('nnModel//tttModel.h5', 'p1') # decide which NN should play
+        go.setPlayers('nn', 'human')
+        go.loadNN('nnModel//TTT_L18_L36_L72_G10000_VSHeuristic.h5', 'p1') # decide which NN should play
         go.__run__()
         
         again = True

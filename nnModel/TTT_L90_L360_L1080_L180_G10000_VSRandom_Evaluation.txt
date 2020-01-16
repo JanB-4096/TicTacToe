@@ -1,0 +1,15 @@
+%%OPTIONS%%
+Number of neurons in Deep Layers: 90, 360, 1080, 180
+Number of games for training: 10000
+Opponent for training: RandomPlayer
+
+%%EVALUATION%%
+Number of Games played vs NPCRandom Player: 1000
+Games won: 451   -->   Win rate: 0.451
+Games lost: 401   -->   Loss rate: 0.401
+Games drawes: 148   -->   Draw rate: 0.148
+
+Number of Games played vs NPCHeuristic Player: 1000
+Games won: 0   -->   Win rate: 0.0
+Games lost: 1000   -->   Loss rate: 1.0
+Games drawes: 0   -->   Draw rate: 0.0
